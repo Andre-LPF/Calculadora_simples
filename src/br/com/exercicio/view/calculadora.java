@@ -139,8 +139,12 @@ public class calculadora {
                 jLabelResultado.setText("" + resultado);
                 break;
             case "/":
-                resultado = valorA.divide(valorB);
-                jLabelResultado.setText("" + resultado);
+                try{
+                    resultado = valorA.divide(valorB);
+                    jLabelResultado.setText("" + resultado);
+                } catch(ArithmeticException ex){
+                    jLabelResultado.setText("não e possível realizar divisão por zero");
+                }
                 break;
         }
     }
