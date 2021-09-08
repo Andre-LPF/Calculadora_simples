@@ -122,30 +122,34 @@ public class calculadora {
     }
 
     private void executarOperacao(String actionCommand) {
-        BigDecimal valorA = new BigDecimal(jTextFieldValorA.getText());
-        BigDecimal valorB = new BigDecimal(jTextFieldValorB.getText());
-        BigDecimal resultado;
-        switch (actionCommand) {
-            case "+":
-                resultado = valorA.add(valorB);
-                jLabelResultado.setText("" + resultado);
-                break;
-            case "-":
-                resultado = valorA.subtract(valorB);
-                jLabelResultado.setText("" + resultado);
-                break;
-            case "*":
-                resultado = valorA.multiply(valorB);
-                jLabelResultado.setText("" + resultado);
-                break;
-            case "/":
-                try{
-                    resultado = valorA.divide(valorB);
+        try {
+            BigDecimal valorA = new BigDecimal(jTextFieldValorA.getText());
+            BigDecimal valorB = new BigDecimal(jTextFieldValorB.getText());
+            BigDecimal resultado;
+            switch (actionCommand) {
+                case "+":
+                    resultado = valorA.add(valorB);
                     jLabelResultado.setText("" + resultado);
-                } catch(ArithmeticException ex){
-                    jLabelResultado.setText("não e possível realizar divisão por zero");
-                }
-                break;
+                    break;
+                case "-":
+                    resultado = valorA.subtract(valorB);
+                    jLabelResultado.setText("" + resultado);
+                    break;
+                case "*":
+                    resultado = valorA.multiply(valorB);
+                    jLabelResultado.setText("" + resultado);
+                    break;
+                case "/":
+                    try {
+                        resultado = valorA.divide(valorB);
+                        jLabelResultado.setText("" + resultado);
+                    } catch (ArithmeticException ex) {
+                        jLabelResultado.setText("invalido, não e possível realizar divisão por zero");
+                    }
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            jLabelResultado.setText("invalido, campo(s) vazio(s)");
         }
     }
 
