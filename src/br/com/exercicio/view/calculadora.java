@@ -1,10 +1,14 @@
 package br.com.exercicio.view;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+
 
 public class calculadora {
     private JTextField jLabelResultado;
@@ -31,7 +35,9 @@ public class calculadora {
         jLabelValorB = new JLabel("Valor B:");
 
         jTextFieldValorA = new JTextField();
+        jTextFieldValorA.setDocument(new onlyNumber());
         jTextFieldValorB = new JTextField();
+        jTextFieldValorB.setDocument(new onlyNumber());
 
         jButtonAdd = new JButton("+");
         jButtonSub = new JButton("-");
@@ -136,6 +142,14 @@ public class calculadora {
                 resultado = valorA.divide(valorB);
                 jLabelResultado.setText("" + resultado);
                 break;
+        }
+    }
+
+    public class onlyNumber extends PlainDocument{
+        @Override
+        public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+
+            super.insertString(offs, str.replaceAll("[^0-9]", ""), a);
         }
     }
 
